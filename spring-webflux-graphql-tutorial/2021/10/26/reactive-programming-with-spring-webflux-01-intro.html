@@ -1,0 +1,769 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Spring GraphQL server based on webflux - Part 1 - Intro - DevSpot Blog</title>
+<meta name="description" content="Reactive programming  Reactive programming is a programming paradigm and has several implementation especially in the frontend world (e.g. VueJS, Angular, React). In the backend technologies it is not so widely used but could help for complex systems with huge amounts of parallel requests or many source data changes.  For more details on reactive programming see:     What is Reactive Programming? by Keval Patels   Reactive Spring by Josh Long   Is Spring WebFlux a Myth? by Gavin Fong   It is not useful in all use-case and could possible add more complexity to your projects. You should check your use-case if it fits into it. For more details see the following blog posts:     Reactive Programming: Why, What and When? by Mohit Snehal   Java Reactive Programming - Effective Usage in a Real World Application by Stefan Nothaas   For me it has been a nice to know use-case and was necessary to evaluate it as an option for future developments.  Spring implementation  Spring added a webflux component to implement a reactive alternative to Spring MVC (based on the Reactor project).  For more details see Spring reactive project page.  Graphql  I’m using Spring most of the time as my services backend and I’ve used OpenAPI based REST services several times and started some projects with GraphQL as the query language. As Spring started the GraphQL server project based on webflux I want to show this sample implementation to deliver a starting point.  For more general purpose and pros / cons of GraphQL see the following links:     GraphQL Website   GraphQL vs. REST: A Comprehensive Comparison by ALFRICK OPIDI    Spring GraphQL documentation   Project description     The sample project created in this description bases on the code examples provided by Josh Long in his video Spring Tips: Spring GraphQL   We want to build a simple GraphQL service which is providing company and person data via a GraphQL service build on top of a Spring GraphQL webflux backend. For this example project I use a classical RDBMS system (PostgreSQL) as it is used in many of my projects as a really reliable, scalable and extendible data source with a huge amount of features / possibilities.  The problem with the JDBC driver in the reactive world  The JDBC driver is a problem in terms of a reactive project because of its IO blocking implementation. The driver will block all further processing unless all data has been fetched from the datasource. This problem can be covered with the enormous implementation of the R2DBC (Reactive Relational Database Connectivity) driver which allows a reactive connection handling with classical RDBMS like PostgreSQL, MySQL, MariaDB, MS SQL Server, Oracle and H2.  For more details see:     R2DBC Resources about the project   R2DBC vs. JDBC Performance comparison by Maarten Smeets   Spring: Blocking vs non-blocking: R2DBC vs JDBC and WebFlux vs Web MVCby Maarten Smeets   Summary  So the tech stack for this sample project will be:     Spring Boot   Spring GraphQL   Spring WebFlux   R2DBC   PostgreSQL   As this project will grow we will add some new items to this list from chapter to chapter to cover more things that will cross my mind.  In Part 2 we will setup the project to make our first GraphQL requests to the database.">
+
+
+  <meta name="author" content="Arne Kröger">
+  
+  <meta property="article:author" content="Arne Kröger">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevSpot Blog">
+<meta property="og:title" content="Spring GraphQL server based on webflux - Part 1 - Intro">
+<meta property="og:url" content="https://arne-kroeger.github.io/spring-webflux-graphql-tutorial/2021/10/26/reactive-programming-with-spring-webflux-01-intro.html">
+
+
+  <meta property="og:description" content="Reactive programming  Reactive programming is a programming paradigm and has several implementation especially in the frontend world (e.g. VueJS, Angular, React). In the backend technologies it is not so widely used but could help for complex systems with huge amounts of parallel requests or many source data changes.  For more details on reactive programming see:     What is Reactive Programming? by Keval Patels   Reactive Spring by Josh Long   Is Spring WebFlux a Myth? by Gavin Fong   It is not useful in all use-case and could possible add more complexity to your projects. You should check your use-case if it fits into it. For more details see the following blog posts:     Reactive Programming: Why, What and When? by Mohit Snehal   Java Reactive Programming - Effective Usage in a Real World Application by Stefan Nothaas   For me it has been a nice to know use-case and was necessary to evaluate it as an option for future developments.  Spring implementation  Spring added a webflux component to implement a reactive alternative to Spring MVC (based on the Reactor project).  For more details see Spring reactive project page.  Graphql  I’m using Spring most of the time as my services backend and I’ve used OpenAPI based REST services several times and started some projects with GraphQL as the query language. As Spring started the GraphQL server project based on webflux I want to show this sample implementation to deliver a starting point.  For more general purpose and pros / cons of GraphQL see the following links:     GraphQL Website   GraphQL vs. REST: A Comprehensive Comparison by ALFRICK OPIDI    Spring GraphQL documentation   Project description     The sample project created in this description bases on the code examples provided by Josh Long in his video Spring Tips: Spring GraphQL   We want to build a simple GraphQL service which is providing company and person data via a GraphQL service build on top of a Spring GraphQL webflux backend. For this example project I use a classical RDBMS system (PostgreSQL) as it is used in many of my projects as a really reliable, scalable and extendible data source with a huge amount of features / possibilities.  The problem with the JDBC driver in the reactive world  The JDBC driver is a problem in terms of a reactive project because of its IO blocking implementation. The driver will block all further processing unless all data has been fetched from the datasource. This problem can be covered with the enormous implementation of the R2DBC (Reactive Relational Database Connectivity) driver which allows a reactive connection handling with classical RDBMS like PostgreSQL, MySQL, MariaDB, MS SQL Server, Oracle and H2.  For more details see:     R2DBC Resources about the project   R2DBC vs. JDBC Performance comparison by Maarten Smeets   Spring: Blocking vs non-blocking: R2DBC vs JDBC and WebFlux vs Web MVCby Maarten Smeets   Summary  So the tech stack for this sample project will be:     Spring Boot   Spring GraphQL   Spring WebFlux   R2DBC   PostgreSQL   As this project will grow we will add some new items to this list from chapter to chapter to cover more things that will cross my mind.  In Part 2 we will setup the project to make our first GraphQL requests to the database.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-10-26T17:13:49+00:00">
+
+
+
+
+
+
+<link rel="canonical" href="reactive-programming-with-spring-webflux-01-intro.html">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://arne-kroeger.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="../../../../feed.xml" type="application/atom+xml" rel="alternate" title="DevSpot Blog Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="iQmBHY4zMRZ_l9UtTX1g3jw_xuALLSn3nsgd51ckEPk" />
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="../../../../assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="reactive-programming-with-spring-webflux-01-intro.html#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="reactive-programming-with-spring-webflux-01-intro.html#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="reactive-programming-with-spring-webflux-01-intro.html#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="../../../../index.html">
+          DevSpot Blog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="../../../../about.html">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="../../../../legal-notice.html">Legal Notice & Privacy</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="../../../../index.html" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="../../../../categories/index.html#spring-webflux-graphql-tutorial" itemprop="item"><span itemprop="name">Spring webflux graphql tutorial</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="../../../../categories/index.html#2021" itemprop="item"><span itemprop="name">2021</span></a>
+          <meta itemprop="position" content="3" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="../../../../categories/index.html#10" itemprop="item"><span itemprop="name">10</span></a>
+          <meta itemprop="position" content="4" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="../../../../categories/index.html#26" itemprop="item"><span itemprop="name">26</span></a>
+          <meta itemprop="position" content="5" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Spring GraphQL server based on webflux - Part 1 - Intro</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="../../../../assets/images/kroegarn.png" alt="Arne Kröger" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Arne Kröger</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>Exploring the world in code.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://github.com/arne-kroeger/" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ArneKroeger" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Spring GraphQL server based on webflux - Part 1 - Intro">
+    <meta itemprop="description" content="Reactive programmingReactive programming is a programming paradigm and has several implementation especially in the frontend world (e.g. VueJS, Angular, React). In the backend technologies it is not so widely used but could help for complex systems with huge amounts of parallel requests or many source data changes.For more details on reactive programming see:  What is Reactive Programming? by Keval Patels  Reactive Spring by Josh Long  Is Spring WebFlux a Myth? by Gavin FongIt is not useful in all use-case and could possible add more complexity to your projects. You should check your use-case if it fits into it. For more details see the following blog posts:  Reactive Programming: Why, What and When? by Mohit Snehal  Java Reactive Programming - Effective Usage in a Real World Application by Stefan NothaasFor me it has been a nice to know use-case and was necessary to evaluate it as an option for future developments.Spring implementationSpring added a webflux component to implement a reactive alternative to Spring MVC (based on the Reactor project).For more details see Spring reactive project page.GraphqlI’m using Spring most of the time as my services backend and I’ve used OpenAPI based REST services several times and started some projects with GraphQL as the query language. As Spring started the GraphQL server project based on webflux I want to show this sample implementation to deliver a starting point.For more general purpose and pros / cons of GraphQL see the following links:  GraphQL Website  GraphQL vs. REST: A Comprehensive Comparison by ALFRICK OPIDI   Spring GraphQL documentationProject description  The sample project created in this description bases on the code examples provided by Josh Long in his video Spring Tips: Spring GraphQLWe want to build a simple GraphQL service which is providing company and person data via a GraphQL service build on top of a Spring GraphQL webflux backend. For this example project I use a classical RDBMS system (PostgreSQL) as it is used in many of my projects as a really reliable, scalable and extendible data source with a huge amount of features / possibilities.The problem with the JDBC driver in the reactive worldThe JDBC driver is a problem in terms of a reactive project because of its IO blocking implementation. The driver will block all further processing unless all data has been fetched from the datasource. This problem can be covered with the enormous implementation of the R2DBC (Reactive Relational Database Connectivity) driver which allows a reactive connection handling with classical RDBMS like PostgreSQL, MySQL, MariaDB, MS SQL Server, Oracle and H2.For more details see:  R2DBC Resources about the project  R2DBC vs. JDBC Performance comparison by Maarten Smeets  Spring: Blocking vs non-blocking: R2DBC vs JDBC and WebFlux vs Web MVCby Maarten SmeetsSummarySo the tech stack for this sample project will be:  Spring Boot  Spring GraphQL  Spring WebFlux  R2DBC  PostgreSQLAs this project will grow we will add some new items to this list from chapter to chapter to cover more things that will cross my mind.In Part 2 we will setup the project to make our first GraphQL requests to the database.">
+    <meta itemprop="datePublished" content="2021-10-26T17:13:49+00:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Spring GraphQL server based on webflux - Part 1 - Intro
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-10-26T17:13:49+00:00">October 26, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h2 id="reactive-programming">Reactive programming</h2>
+
+<p>Reactive programming is a programming paradigm and has several implementation especially in the frontend world (e.g. <a href="https://vuejs.org/" rel="nofollow">VueJS</a>, <a href="https://angular.io/" rel="nofollow">Angular</a>, <a href="https://reactjs.org/" rel="nofollow">React</a>). In the backend technologies it is not so widely used but could help for complex systems with huge amounts of parallel requests or many source data changes.</p>
+
+<p>For more details on reactive programming see:</p>
+
+<ul>
+  <li><a href="https://medium.com/@kevalpatel2106/what-is-reactive-programming-da37c1611382" rel="nofollow">What is Reactive Programming? by Keval Patels</a></li>
+  <li><a href="https://reactivespring.io/" rel="nofollow">Reactive Spring by Josh Long</a></li>
+  <li><a href="https://blog.devgenius.io/is-spring-webflux-a-myth-4526c2f92413" rel="nofollow">Is Spring WebFlux a Myth? by Gavin Fong</a></li>
+</ul>
+
+<p>It is not useful in all use-case and could possible add more complexity to your projects. You should check your use-case if it fits into it. For more details see the following blog posts:</p>
+
+<ul>
+  <li><a href="https://blog.devgenius.io/reactive-programming-why-what-and-when-e00495cda9c4" rel="nofollow">Reactive Programming: Why, What and When? by Mohit Snehal</a></li>
+  <li><a href="https://tech.trivago.com/2021/03/16/java-reactive-programming-effective-usage-in-a-real-world-application/" rel="nofollow">Java Reactive Programming - Effective Usage in a Real World Application by Stefan Nothaas</a></li>
+</ul>
+
+<p>For me it has been a nice to know use-case and was necessary to evaluate it as an option for future developments.</p>
+
+<h3 id="spring-implementation">Spring implementation</h3>
+
+<p>Spring added a webflux component to implement a reactive alternative to Spring MVC (based on the <a href="https://projectreactor.io/" rel="nofollow">Reactor project</a>).</p>
+
+<p>For more details see <a href="https://spring.io/reactive" rel="nofollow">Spring reactive project page</a>.</p>
+
+<h2 id="graphql">Graphql</h2>
+
+<p>I’m using Spring most of the time as my services backend and I’ve used <a href="https://www.openapis.org/" rel="nofollow">OpenAPI</a> based REST services several times and started some projects with GraphQL as the query language. As Spring started the GraphQL server project based on webflux I want to show this sample implementation to deliver a starting point.</p>
+
+<p>For more general purpose and pros / cons of GraphQL see the following links:</p>
+
+<ul>
+  <li><a href="https://graphql.org/" rel="nofollow">GraphQL Website</a></li>
+  <li><a href="https://blog.api.rakuten.net/graphql-vs-rest/" rel="nofollow">GraphQL vs. REST: A Comprehensive Comparison by ALFRICK OPIDI </a></li>
+  <li><a href="https://docs.spring.io/spring-graphql/docs/1.0.0-SNAPSHOT/reference/html/" rel="nofollow">Spring GraphQL documentation</a></li>
+</ul>
+
+<h2 id="project-description">Project description</h2>
+
+<blockquote>
+  <p>The sample project created in this description bases on the code examples provided by Josh Long in his video <a href="https://www.youtube.com/watch?v=kVSYVhmvNCI&amp;ab_channel=SpringDeveloper" rel="nofollow">Spring Tips: Spring GraphQL</a></p>
+</blockquote>
+
+<p>We want to build a simple GraphQL service which is providing company and person data via a GraphQL service build on top of a Spring GraphQL webflux backend. For this example project I use a classical RDBMS system (PostgreSQL) as it is used in many of my projects as a really reliable, scalable and extendible data source with a huge amount of features / possibilities.</p>
+
+<h3 id="the-problem-with-the-jdbc-driver-in-the-reactive-world">The problem with the JDBC driver in the reactive world</h3>
+
+<p>The JDBC driver is a problem in terms of a reactive project because of its IO blocking implementation. The driver will block all further processing unless all data has been fetched from the datasource. This problem can be covered with the enormous implementation of the R2DBC (Reactive Relational Database Connectivity) driver which allows a reactive connection handling with classical RDBMS like PostgreSQL, MySQL, MariaDB, MS SQL Server, Oracle and H2.</p>
+
+<p>For more details see:</p>
+
+<ul>
+  <li><a href="https://r2dbc.io/resources" rel="nofollow">R2DBC Resources about the project</a></li>
+  <li><a href="https://technology.amis.nl/software-development/performance-and-tuning/performance-of-relational-database-drivers-r2dbc-vs-jdbc/" rel="nofollow">R2DBC vs. JDBC Performance comparison by Maarten Smeets</a></li>
+  <li><a href="https://technology.amis.nl/software-development/performance-and-tuning/spring-blocking-vs-non-blocking-r2dbc-vs-jdbc-and-webflux-vs-web-mvc/" rel="nofollow">Spring: Blocking vs non-blocking: R2DBC vs JDBC and WebFlux vs Web MVCby Maarten Smeets</a></li>
+</ul>
+
+<h3 id="summary">Summary</h3>
+
+<p>So the tech stack for this sample project will be:</p>
+
+<ul>
+  <li>Spring Boot</li>
+  <li>Spring GraphQL</li>
+  <li>Spring WebFlux</li>
+  <li>R2DBC</li>
+  <li>PostgreSQL</li>
+</ul>
+
+<p>As this project will grow we will add some new items to this list from chapter to chapter to cover more things that will cross my mind.</p>
+
+<p>In <a href="../../11/14/reactive-programming-with-spring-webflux-02-getting-started.html">Part 2</a> we will setup the project to make our first GraphQL requests to the database.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="../../../../tags/index.html#graphql" class="page__taxonomy-item" rel="tag">graphql</a><span class="sep">, </span>
+    
+      <a href="../../../../tags/index.html#java" class="page__taxonomy-item" rel="tag">java</a><span class="sep">, </span>
+    
+      <a href="../../../../tags/index.html#reactive" class="page__taxonomy-item" rel="tag">reactive</a><span class="sep">, </span>
+    
+      <a href="../../../../tags/index.html#spring" class="page__taxonomy-item" rel="tag">spring</a><span class="sep">, </span>
+    
+      <a href="../../../../tags/index.html#webflux" class="page__taxonomy-item" rel="tag">webflux</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="../../../../categories/index.html#spring-webflux-graphql-tutorial" class="page__taxonomy-item" rel="tag">Spring-Webflux-GraphQL-Tutorial</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-10-26T17:13:49+00:00">October 26, 2021</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Spring+GraphQL+server+based+on+webflux+-+Part+1+-+Intro%20https%3A%2F%2Farne-kroeger.github.io%2Fspring-webflux-graphql-tutorial%2F2021%2F10%2F26%2Freactive-programming-with-spring-webflux-01-intro.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farne-kroeger.github.io%2Fspring-webflux-graphql-tutorial%2F2021%2F10%2F26%2Freactive-programming-with-spring-webflux-01-intro.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Farne-kroeger.github.io%2Fspring-webflux-graphql-tutorial%2F2021%2F10%2F26%2Freactive-programming-with-spring-webflux-01-intro.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="../../../../general/2021/10/25/why-this-blog.html" class="pagination--pager" title="Another why this blog entry…
+">Previous</a>
+    
+    
+      <a href="../../11/14/reactive-programming-with-spring-webflux-02-getting-started.html" class="pagination--pager" title="Spring GraphQL server based on webflux - Part 2 - Spring GraphQL on Webflux
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Comments</h4>
+      <section id="giscus-comments"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="../../../../spring/2022/05/10/how-to-deal-with-spring-redis-json-security-module.html" rel="permalink">Spring Session Redis JSON with Keycloak - A journey with the allowlist of Jackson
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-05-10T12:22:49+00:00">May 10, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">What happened?
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="../../11/14/reactive-programming-with-spring-webflux-02-getting-started.html" rel="permalink">Spring GraphQL server based on webflux - Part 2 - Spring GraphQL on Webflux
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-11-14T08:22:49+00:00">November 14, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Retro
+
+In Part 1 we introduced the general topics of reactive programming, webflux, GraphQL and R2DBC.
+
+Spring starter
+
+Let’s start with a standard Spring st...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="../../../../general/2021/10/25/why-this-blog.html" rel="permalink">Another why this blog entry…
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-10-25T10:13:49+00:00">October 25, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">After years of enjoying the beautiful work others have done and contributed to the community it is time to give something back to all of you. The pure usage ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+
+    
+      <li><a href="../../../../feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 DevSpot Blog. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="../../../../assets/js/main.min.js"></script>
+
+
+
+
+<script src="../../../../assets/js/lunr/lunr.min.js"></script>
+<script src="../../../../assets/js/lunr/lunr-store.js"></script>
+<script src="../../../../assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    <script>
+  'use strict';
+
+  (function () {
+    var commentContainer = document.querySelector('#giscus-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://giscus.app/client.js');
+    script.setAttribute('data-repo', 'arne-kroeger/arne-kroeger.github.io');
+    script.setAttribute('data-repo-id', 'R_kgDOGRmbZg');
+    script.setAttribute('data-category', 'Announcements');
+    script.setAttribute('data-category-id', 'DIC_kwDOGRmbZs4B_k3c');
+    script.setAttribute('data-mapping', 'pathname');
+    script.setAttribute('data-reactions-enabled', '1');
+    script.setAttribute('data-theme', 'light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+  
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,715 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Another why this blog entry… - DevSpot Blog</title>
+<meta name="description" content="After years of enjoying the beautiful work others have done and contributed to the community it is time to give something back to all of you. The pure usage of a single blog entry has been reduced to the more specific or related topics I’m looking for and generally new technologies have a lack of new entries provided.  Additionally I will use this blog to reflect all my learnings I’ve made and will make… Maybe this will help you also from time to time…  I would also love to get your feedback about my thoughts and developments to discuss this and get another point of view to it to find better solutions in the future.  The main focus will be development or generally tech related content like.  Spring  I really appreciate the enormous work the Spring team has made to make a Java developers so much easier which gives us the opportunity to focus on the general purpose of the project. If you want to look into it I would recommend to start any of the documentation, how tos, blogs, podcasts and tutorials out there which do enormous work to provide you with all necessary infos related in any kind to help out.  If you want to be up to date about topics related to Spring I would suggest to follow the channels of Josh Long:    Twitter: @starbuxman   Podcast: Bootiful Podcast   DevOps  My roots are in system administration so topics like automation and infrastructure as code were always relevant and I love solutions to make this job much more easy.  If you want to be up to date about topics related to DevOps I would suggest the Arrested DevOps Podcast.  General development related topics  All other topics…">
+
+
+  <meta name="author" content="Arne Kröger">
+  
+  <meta property="article:author" content="Arne Kröger">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevSpot Blog">
+<meta property="og:title" content="Another why this blog entry…">
+<meta property="og:url" content="https://arne-kroeger.github.io/general/2021/10/25/why-this-blog.html">
+
+
+  <meta property="og:description" content="After years of enjoying the beautiful work others have done and contributed to the community it is time to give something back to all of you. The pure usage of a single blog entry has been reduced to the more specific or related topics I’m looking for and generally new technologies have a lack of new entries provided.  Additionally I will use this blog to reflect all my learnings I’ve made and will make… Maybe this will help you also from time to time…  I would also love to get your feedback about my thoughts and developments to discuss this and get another point of view to it to find better solutions in the future.  The main focus will be development or generally tech related content like.  Spring  I really appreciate the enormous work the Spring team has made to make a Java developers so much easier which gives us the opportunity to focus on the general purpose of the project. If you want to look into it I would recommend to start any of the documentation, how tos, blogs, podcasts and tutorials out there which do enormous work to provide you with all necessary infos related in any kind to help out.  If you want to be up to date about topics related to Spring I would suggest to follow the channels of Josh Long:    Twitter: @starbuxman   Podcast: Bootiful Podcast   DevOps  My roots are in system administration so topics like automation and infrastructure as code were always relevant and I love solutions to make this job much more easy.  If you want to be up to date about topics related to DevOps I would suggest the Arrested DevOps Podcast.  General development related topics  All other topics…">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-10-25T10:13:49+00:00">
+
+
+
+
+
+
+<link rel="canonical" href="why-this-blog.html">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "https://arne-kroeger.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="../../../../feed.xml" type="application/atom+xml" rel="alternate" title="DevSpot Blog Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="iQmBHY4zMRZ_l9UtTX1g3jw_xuALLSn3nsgd51ckEPk" />
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="../../../../assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="why-this-blog.html#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="why-this-blog.html#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="why-this-blog.html#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="../../../../index.html">
+          DevSpot Blog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="../../../../about.html">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="../../../../legal-notice.html">Legal Notice & Privacy</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="../../../../index.html" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="../../../../categories/index.html#general" itemprop="item"><span itemprop="name">General</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="../../../../categories/index.html#2021" itemprop="item"><span itemprop="name">2021</span></a>
+          <meta itemprop="position" content="3" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="../../../../categories/index.html#10" itemprop="item"><span itemprop="name">10</span></a>
+          <meta itemprop="position" content="4" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="../../../../categories/index.html#25" itemprop="item"><span itemprop="name">25</span></a>
+          <meta itemprop="position" content="5" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Another why this blog entry...</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="../../../../assets/images/kroegarn.png" alt="Arne Kröger" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Arne Kröger</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>Exploring the world in code.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://github.com/arne-kroeger/" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ArneKroeger" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Another why this blog entry…">
+    <meta itemprop="description" content="After years of enjoying the beautiful work others have done and contributed to the community it is time to give something back to all of you. The pure usage of a single blog entry has been reduced to the more specific or related topics I’m looking for and generally new technologies have a lack of new entries provided.Additionally I will use this blog to reflect all my learnings I’ve made and will make… Maybe this will help you also from time to time…I would also love to get your feedback about my thoughts and developments to discuss this and get another point of view to it to find better solutions in the future.The main focus will be development or generally tech related content like.SpringI really appreciate the enormous work the Spring team has made to make a Java developers so much easier which gives us the opportunity to focus on the general purpose of the project. If you want to look into it I would recommend to start any of the documentation, how tos, blogs, podcasts and tutorials out there which do enormous work to provide you with all necessary infos related in any kind to help out.If you want to be up to date about topics related to Spring I would suggest to follow the channels of Josh Long:  Twitter: @starbuxman  Podcast: Bootiful PodcastDevOpsMy roots are in system administration so topics like automation and infrastructure as code were always relevant and I love solutions to make this job much more easy.If you want to be up to date about topics related to DevOps I would suggest the Arrested DevOps Podcast.General development related topicsAll other topics…">
+    <meta itemprop="datePublished" content="2021-10-25T10:13:49+00:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Another why this blog entry…
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-10-25T10:13:49+00:00">October 25, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>After years of enjoying the beautiful work others have done and contributed to the community it is time to give something back to all of you. The pure usage of a single blog entry has been reduced to the more specific or related topics I’m looking for and generally new technologies have a lack of new entries provided.</p>
+
+<p>Additionally I will use this blog to reflect all my learnings I’ve made and will make… Maybe this will help you also from time to time…</p>
+
+<p>I would also love to get your feedback about my thoughts and developments to discuss this and get another point of view to it to find better solutions in the future.</p>
+
+<p>The main focus will be development or generally tech related content like.</p>
+
+<h2 id="spring">Spring</h2>
+
+<p>I really appreciate the enormous work the <a href="https://spring.io/" rel="nofollow">Spring team</a> has made to make a Java developers so much easier which gives us the opportunity to focus on the general purpose of the project. If you want to look into it I would recommend to start any of the documentation, how tos, blogs, podcasts and tutorials out there which do enormous work to provide you with all necessary infos related in any kind to help out.</p>
+
+<p>If you want to be up to date about topics related to Spring I would suggest to follow the channels of Josh Long:</p>
+<ul>
+  <li>Twitter: <a href="https://twitter.com/starbuxman?lang=de" rel="nofollow">@starbuxman</a></li>
+  <li>Podcast: <a href="https://bootifulpodcast.fm/" rel="nofollow">Bootiful Podcast</a></li>
+</ul>
+
+<h2 id="devops">DevOps</h2>
+
+<p>My roots are in system administration so topics like automation and infrastructure as code were always relevant and I love solutions to make this job much more easy.</p>
+
+<p>If you want to be up to date about topics related to DevOps I would suggest the <a href="https://www.arresteddevops.com/" rel="nofollow">Arrested DevOps Podcast</a>.</p>
+
+<h2 id="general-development-related-topics">General development related topics</h2>
+
+<p>All other topics…</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="../../../../tags/index.html#blog" class="page__taxonomy-item" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="../../../../categories/index.html#general" class="page__taxonomy-item" rel="tag">general</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-10-25T10:13:49+00:00">October 25, 2021</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Another+why+this+blog+entry...%20https%3A%2F%2Farne-kroeger.github.io%2Fgeneral%2F2021%2F10%2F25%2Fwhy-this-blog.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farne-kroeger.github.io%2Fgeneral%2F2021%2F10%2F25%2Fwhy-this-blog.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Farne-kroeger.github.io%2Fgeneral%2F2021%2F10%2F25%2Fwhy-this-blog.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="why-this-blog.html#" class="pagination--pager disabled">Previous</a>
+    
+    
+      <a href="../../../../spring-webflux-graphql-tutorial/2021/10/26/reactive-programming-with-spring-webflux-01-intro.html" class="pagination--pager" title="Spring GraphQL server based on webflux - Part 1 - Intro
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Comments</h4>
+      <section id="giscus-comments"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="../../../../spring/2022/05/10/how-to-deal-with-spring-redis-json-security-module.html" rel="permalink">Spring Session Redis JSON with Keycloak - A journey with the allowlist of Jackson
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-05-10T12:22:49+00:00">May 10, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">What happened?
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="../../../../spring-webflux-graphql-tutorial/2021/11/14/reactive-programming-with-spring-webflux-02-getting-started.html" rel="permalink">Spring GraphQL server based on webflux - Part 2 - Spring GraphQL on Webflux
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-11-14T08:22:49+00:00">November 14, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Retro
+
+In Part 1 we introduced the general topics of reactive programming, webflux, GraphQL and R2DBC.
+
+Spring starter
+
+Let’s start with a standard Spring st...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="../../../../spring-webflux-graphql-tutorial/2021/10/26/reactive-programming-with-spring-webflux-01-intro.html" rel="permalink">Spring GraphQL server based on webflux - Part 1 - Intro
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-10-26T17:13:49+00:00">October 26, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Reactive programming
+
+Reactive programming is a programming paradigm and has several implementation especially in the frontend world (e.g. VueJS, Angular, Re...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+
+    
+      <li><a href="../../../../feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 DevSpot Blog. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="../../../../assets/js/main.min.js"></script>
+
+
+
+
+<script src="../../../../assets/js/lunr/lunr.min.js"></script>
+<script src="../../../../assets/js/lunr/lunr-store.js"></script>
+<script src="../../../../assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    <script>
+  'use strict';
+
+  (function () {
+    var commentContainer = document.querySelector('#giscus-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://giscus.app/client.js');
+    script.setAttribute('data-repo', 'arne-kroeger/arne-kroeger.github.io');
+    script.setAttribute('data-repo-id', 'R_kgDOGRmbZg');
+    script.setAttribute('data-category', 'Announcements');
+    script.setAttribute('data-category-id', 'DIC_kwDOGRmbZs4B_k3c');
+    script.setAttribute('data-mapping', 'pathname');
+    script.setAttribute('data-reactions-enabled', '1');
+    script.setAttribute('data-theme', 'light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+  
+
+
+
+
+
+  </body>
+</html>
